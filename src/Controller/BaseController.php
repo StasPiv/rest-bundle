@@ -121,4 +121,16 @@ abstract class BaseController extends FOSRestController
     {
         $view->getContext()->setGroups(array_merge(['Default', $route]));
     }
+
+    /**
+     * @param array $data
+     * @param int   $statusCode
+     * @return Response
+     */
+    protected function processMock(array $data, int $statusCode = Response::HTTP_OK): Response
+    {
+        return $this->handleView(
+            $this->view($data, $statusCode)
+        );
+    }
 }
