@@ -1,5 +1,5 @@
 {
-    "name": "staspiv/rest-bundle",
+    "name": "nd-symfony/rest-bundle",
     "type": "symfony-bundle",
     "description": "This Bundle extends friendsofsymfony/rest-bundle to easy develop rest applications",
     "keywords": ["rest"],
