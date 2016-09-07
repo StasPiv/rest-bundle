@@ -1,6 +1,6 @@
 <?php
 
-namespace StasPiv\RestBundle\Handler;
+namespace NorseDigital\Symfony\RestBundle\Handler;
 
 /**
  * Interface ErrorInterface.

@@ -1,14 +1,14 @@
 <?php
 
-namespace StasPiv\RestBundle\Controller;
+namespace NorseDigital\Symfony\RestBundle\Controller;
 
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
-use StasPiv\RestBundle\Event\ProcessorEvent;
-use StasPiv\RestBundle\Event\ProcessorEvents;
-use StasPiv\RestBundle\Handler\ErrorInterface;
-use StasPiv\RestBundle\Handler\ProcessorInterface;
+use NorseDigital\Symfony\RestBundle\Event\ProcessorEvent;
+use NorseDigital\Symfony\RestBundle\Event\ProcessorEvents;
+use NorseDigital\Symfony\RestBundle\Handler\ErrorInterface;
+use NorseDigital\Symfony\RestBundle\Handler\ProcessorInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

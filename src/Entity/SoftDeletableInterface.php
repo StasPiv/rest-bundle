@@ -1,6 +1,6 @@
 <?php
 
-namespace StasPiv\RestBundle\Entity;
+namespace NorseDigital\Symfony\RestBundle\Entity;
 
 /**
  * Interface SoftDeletableInterface.

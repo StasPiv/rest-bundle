@@ -1,6 +1,6 @@
 <?php
 
-namespace StasPiv\RestBundle\Event;
+namespace NorseDigital\Symfony\RestBundle\Event;
 
 /**
  * Class ProcessorEvents.

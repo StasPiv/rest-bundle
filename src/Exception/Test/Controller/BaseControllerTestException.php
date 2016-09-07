@@ -1,6 +1,6 @@
 <?php
 
-namespace StasPiv\RestBundle\Test\Controller;
+namespace NorseDigital\Symfony\RestBundle\Test\Controller;
 
 /**
  * Class BaseControllerTestException.

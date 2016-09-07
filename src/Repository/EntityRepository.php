@@ -1,10 +1,10 @@
 <?php
 
-namespace StasPiv\RestBundle\Repository;
+namespace NorseDigital\Symfony\RestBundle\Repository;
 
 use Doctrine\ORM\EntityNotFoundException;
-use StasPiv\RestBundle\Entity\EntityInterface;
-use StasPiv\RestBundle\Request\ListRequestInterface;
+use NorseDigital\Symfony\RestBundle\Entity\EntityInterface;
+use NorseDigital\Symfony\RestBundle\Request\ListRequestInterface;
 
 /**
  * Class EntityRepository.

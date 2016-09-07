@@ -6,11 +6,11 @@
  * Time: 13:14.
  */
 
-namespace StasPiv\RestBundle\Service;
+namespace NorseDigital\Symfony\RestBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use StasPiv\RestBundle\Entity\EntityInterface;
-use StasPiv\RestBundle\Request\ListRequestInterface;
+use NorseDigital\Symfony\RestBundle\Entity\EntityInterface;
+use NorseDigital\Symfony\RestBundle\Request\ListRequestInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;

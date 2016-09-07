@@ -6,11 +6,11 @@
  * Time: 12:51.
  */
 
-namespace StasPiv\RestBundle\Test;
+namespace NorseDigital\Symfony\RestBundle\Test;
 
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use StasPiv\RestBundle\Test\Controller\BaseControllerTestException;
+use NorseDigital\Symfony\RestBundle\Test\Controller\BaseControllerTestException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**

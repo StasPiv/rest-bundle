@@ -6,13 +6,13 @@
  * Time: 13:12.
  */
 
-namespace StasPiv\RestBundle\Fixture;
+namespace NorseDigital\Symfony\RestBundle\Fixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use StasPiv\RestBundle\Entity\EntityInterface;
-use StasPiv\RestBundle\Service\AbstractService;
+use NorseDigital\Symfony\RestBundle\Entity\EntityInterface;
+use NorseDigital\Symfony\RestBundle\Service\AbstractService;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 

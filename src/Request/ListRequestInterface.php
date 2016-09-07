@@ -1,6 +1,6 @@
 <?php
 
-namespace StasPiv\RestBundle\Request;
+namespace NorseDigital\Symfony\RestBundle\Request;
 
 /**
  * Interface ListRequestInterface.

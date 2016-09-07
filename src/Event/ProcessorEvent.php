@@ -1,6 +1,6 @@
 <?php
 
-namespace StasPiv\RestBundle\Event;
+namespace NorseDigital\Symfony\RestBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
