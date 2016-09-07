@@ -28,7 +28,7 @@
 
     "autoload":{
         "psr-4":{
-            "StasPiv\\RestBundle\\": "src"
+            "NorseDigital\\Symfony\\RestBundle\\": "src"
         }
     }
 }
