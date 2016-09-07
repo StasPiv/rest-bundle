@@ -5,7 +5,6 @@
  * Date: 27.07.16
  * Time: 13:12.
  */
-
 namespace NorseDigital\Symfony\RestBundle\Fixture;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;

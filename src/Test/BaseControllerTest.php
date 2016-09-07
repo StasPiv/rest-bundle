@@ -5,7 +5,6 @@
  * Date: 27.07.16
  * Time: 12:51.
  */
-
 namespace NorseDigital\Symfony\RestBundle\Test;
 
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;

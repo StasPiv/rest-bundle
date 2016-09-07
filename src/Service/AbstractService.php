@@ -5,7 +5,6 @@
  * Date: 27.07.16
  * Time: 13:14.
  */
-
 namespace NorseDigital\Symfony\RestBundle\Service;
 
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -96,8 +95,6 @@ abstract class AbstractService implements ContainerAwareInterface
         $this->getManager()->persist($entity);
     }
 
-    /**
-     */
     public function flush()
     {
         $this->getManager()->flush();
