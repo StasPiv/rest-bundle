@@ -18,10 +18,9 @@ class RestBundle extends Bundle
     {
         parent::build($container);
         $loader = new YamlFileLoader($container, new FileLocator(
-            [__DIR__.'/../Resources/config/']
+            [__DIR__.'/Resources/config/']
         ));
 
         $loader->load('services.yml');
     }
-
 }
