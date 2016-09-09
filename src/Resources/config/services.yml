@@ -1,0 +1,6 @@
+parameters:
+  core.service.nd_fixture.generator.class: NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator
+
+services:
+  core.service.nd_fixture_generator:
+    class: "%core.service.nd_fixture.generator.class%"
