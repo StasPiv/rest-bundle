@@ -125,6 +125,7 @@ abstract class BaseController extends FOSRestController
     /**
      * @param array $data
      * @param int   $statusCode
+     *
      * @return Response
      */
     protected function processMock(array $data, int $statusCode = Response::HTTP_OK): Response
