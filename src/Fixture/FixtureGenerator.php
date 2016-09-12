@@ -7,6 +7,7 @@
  */
 namespace NorseDigital\Symfony\RestBundle\Fixture;
 
+use Doctrine\Common\Util\Inflector;
 use JMS\Serializer\SerializerBuilder;
 use NorseDigital\Symfony\RestBundle\Exception\Fixture\FixtureGeneratorException;
 use NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator\FixtureGeneratorRule;
@@ -122,10 +123,11 @@ class FixtureGenerator
 
     /**
      * @param string $configFileName
-     * @param string $configDirectoryPath
      * @param string $destinationPath
+     *
+     * @internal param string $configDirectoryPath
      */
-    public function saveFromConfig(string $configFileName, string $configDirectoryPath, string $destinationPath)
+    public function saveFromConfig(string $configFileName, string $destinationPath)
     {
         if (!file_exists($configFileName)) {
             throw new FileNotFoundException('File not found: '.$configFileName);
@@ -135,11 +137,31 @@ class FixtureGenerator
 
         $rule = SerializerBuilder::create()->build()->deserialize($configJson, FixtureGeneratorRule::class, 'json');
 
-//        $config = json_decode($configJson, true);
-
-//        $rule = $this->createRuleFromConfig($config, $configDirectoryPath);
-
         file_put_contents($destinationPath, json_encode($this->generateArrayForRule($rule), JSON_PRETTY_PRINT));
+    }
+
+    public function generateAllFixtures(string $pathToFixtures)
+    {
+        $pathToConfig = $pathToFixtures.'config/';
+
+        $files = glob($pathToConfig.'*');
+
+        foreach ($files as $configFileName) {
+            $destination = str_replace(
+                '.json',
+                'Fixtures.json',
+                substr(
+                    ucfirst(
+                        Inflector::camelize(basename($configFileName))
+                    ),
+                    2
+                )
+            );
+            $this->saveFromConfig(
+                $configFileName,
+                $pathToFixtures.$destination
+            );
+        }
     }
 
     /**

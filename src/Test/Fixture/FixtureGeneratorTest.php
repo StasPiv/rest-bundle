@@ -81,7 +81,7 @@ class FixtureGeneratorTest extends TestCase
 
     public function testGenerateFromJsonConfig()
     {
-        $this->generator->saveFromConfig(__DIR__.'/config.json', __DIR__, __DIR__.'/UserFixtures_output.json');
+        $this->generator->saveFromConfig(__DIR__.'/config.json', __DIR__.'/UserFixtures_output.json');
     }
 
     public function testSave()
