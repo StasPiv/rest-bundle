@@ -35,6 +35,13 @@
           "strategy": "reference"
         }
       ]
+    },
+    {
+      "key": "random_word",
+      "prefix": "status-",
+      "words": ["open", "closed"],
+      "count": 3,
+      "strategy": "word"
     }
   ]
 }

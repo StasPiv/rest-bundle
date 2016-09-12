@@ -41,7 +41,7 @@ class FixtureGenerator
         $chunks = [];
 
         for ($i = 0; $i < $rule->getCount(); ++$i) {
-            $chunks[] = $this->generateChunk($rule);
+            $chunks[] = $rule->getPrefix().$this->generateChunk($rule);
         }
 
         return implode($rule->getDelimiter(), $chunks);
@@ -77,6 +77,12 @@ class FixtureGenerator
                 }
 
                 return $referenceArray[mt_rand(0, count($referenceArray) - 1)]['referenceName'];
+            case FixtureGeneratorStrategy::WORD:
+                if (empty($rule->getWords())) {
+                    throw new \Exception('words is needed for the rule `words`');
+                }
+
+                return $rule->getWords()[mt_rand(0, count($rule->getWords()) - 1)];
             default:
                 return mt_rand(1, 1000);
         }

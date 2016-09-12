@@ -40,6 +40,13 @@ class FixtureGeneratorRule
     private $count = 1;
 
     /**
+     * @var array
+     *
+     * @JMS\Type("array")
+     */
+    private $words = [];
+
+    /**
      * @var int
      *
      * @JMS\Type("integer")
@@ -51,7 +58,7 @@ class FixtureGeneratorRule
      *
      * @JMS\Type("string")
      */
-    private $delimiter = '';
+    private $delimiter = ' ';
 
     /**
      * @var string
@@ -303,6 +310,26 @@ class FixtureGeneratorRule
     public function setReferenceConfigFile(string $referenceConfigFile): self
     {
         $this->referenceConfigFile = $referenceConfigFile;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getWords(): array
+    {
+        return $this->words;
+    }
+
+    /**
+     * @param array $words
+     *
+     * @return FixtureGeneratorRule
+     */
+    public function setWords(array $words): self
+    {
+        $this->words = $words;
 
         return $this;
     }
