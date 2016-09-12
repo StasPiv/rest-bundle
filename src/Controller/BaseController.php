@@ -26,7 +26,10 @@ abstract class BaseController extends FOSRestController
     /**
      * @return ErrorInterface
      */
-    abstract protected function getErrorHandler() : ErrorInterface;
+    protected function getErrorHandler() : ErrorInterface
+    {
+        return $this->getProcessor();
+    }
 
     /**
      * @param Request $request

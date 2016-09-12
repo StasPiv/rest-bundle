@@ -5,6 +5,6 @@ namespace NorseDigital\Symfony\RestBundle\Handler;
 /**
  * Interface ProcessorInterface.
  */
-interface ProcessorInterface
+interface ProcessorInterface extends ErrorInterface
 {
 }
