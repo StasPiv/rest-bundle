@@ -82,7 +82,7 @@ abstract class BaseController extends FOSRestController
                 $data['debug']['errorFile'] = $exception->getFile();
                 $data['debug']['errorLine'] = $exception->getLine();
                 $data['debug']['errorType'] = get_class($exception);
-                $data['debug']['trace'] = $exception->getTrace();
+                //$data['debug']['trace'] = $exception->getTrace();
             }
             $statusCode = $exception->getCode() && round($exception->getCode() / 100) == 4 ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
         }
