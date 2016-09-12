@@ -7,50 +7,77 @@
  */
 namespace NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator;
 
+use JMS\Serializer\Annotation as JMS;
+
 class FixtureGeneratorRule
 {
     /**
      * @var array|FixtureGeneratorRule[]
+     *
+     * @JMS\Type("array<NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator\FixtureGeneratorRule>")
      */
     private $rules = [];
 
     /**
      * @var string
+     *
+     * @JMS\Type("string")
      */
     private $key = '';
 
     /**
      * @var string
+     *
+     * @JMS\Type("string")
      */
     private $strategy = FixtureGeneratorStrategy::WORD;
 
     /**
      * @var int
+     *
+     * @JMS\Type("integer")
      */
     private $count = 1;
 
     /**
      * @var int
+     *
+     * @JMS\Type("integer")
      */
     private $countRepeat = 1;
 
     /**
      * @var string
+     *
+     * @JMS\Type("string")
      */
     private $delimiter = '';
 
     /**
      * @var string
+     *
+     * @JMS\Type("string")
      */
     private $prefix = '';
 
     /**
      * @var array
+     *
+     * @JMS\Type("array")
      */
     private $referenceArray = [];
 
     /**
+     * @var string
+     *
+     * @JMS\Type("string")
+     */
+    private $referenceConfigFile = '';
+
+    /**
      * @var int
+     *
+     * @JMS\Type("integer")
      */
     private $number = 1;
 
@@ -256,6 +283,26 @@ class FixtureGeneratorRule
     public function setNumber(int $number): self
     {
         $this->number = $number;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReferenceConfigFile(): string
+    {
+        return $this->referenceConfigFile;
+    }
+
+    /**
+     * @param string $referenceConfigFile
+     *
+     * @return FixtureGeneratorRule
+     */
+    public function setReferenceConfigFile(string $referenceConfigFile): self
+    {
+        $this->referenceConfigFile = $referenceConfigFile;
 
         return $this;
     }

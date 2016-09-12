@@ -7,9 +7,11 @@
  */
 namespace NorseDigital\Symfony\RestBundle\Fixture;
 
+use JMS\Serializer\SerializerBuilder;
 use NorseDigital\Symfony\RestBundle\Exception\Fixture\FixtureGeneratorException;
 use NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator\FixtureGeneratorRule;
 use NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator\FixtureGeneratorStrategy;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class FixtureGenerator
 {
@@ -49,6 +51,8 @@ class FixtureGenerator
      * @param FixtureGeneratorRule $rule
      *
      * @return int|string
+     *
+     * @throws \Exception
      */
     private function generateChunk(FixtureGeneratorRule $rule)
     {
@@ -60,7 +64,19 @@ class FixtureGenerator
 
                 return $value;
             case FixtureGeneratorStrategy::REFERENCE:
-                return $rule->getReferenceArray()[mt_rand(0, count($rule->getReferenceArray()) - 1)]['referenceName'];
+                if (!empty($rule->getReferenceArray())) {
+                    $referenceArray = $rule->getReferenceArray();
+                }
+
+                if (!empty($rule->getReferenceConfigFile())) {
+                    $referenceArray = json_decode(file_get_contents($rule->getReferenceConfigFile()), true);
+                }
+
+                if (empty($referenceArray)) {
+                    throw new \Exception('ReferenceArray is needed for the rule: ');
+                }
+
+                return $referenceArray[mt_rand(0, count($referenceArray) - 1)]['referenceName'];
             default:
                 return mt_rand(1, 1000);
         }
@@ -92,5 +108,107 @@ class FixtureGenerator
     public function save(string $fileName, FixtureGeneratorRule $rule)
     {
         file_put_contents($fileName, $this->generate($rule));
+    }
+
+    /**
+     * @param string $configFileName
+     * @param string $configDirectoryPath
+     * @param string $destinationPath
+     */
+    public function saveFromConfig(string $configFileName, string $configDirectoryPath, string $destinationPath)
+    {
+        if (!file_exists($configFileName)) {
+            throw new FileNotFoundException('File not found: '.$configFileName);
+        }
+
+        $configJson = file_get_contents($configFileName);
+
+        $rule = SerializerBuilder::create()->build()->deserialize($configJson, FixtureGeneratorRule::class, 'json');
+
+//        $config = json_decode($configJson, true);
+
+//        $rule = $this->createRuleFromConfig($config, $configDirectoryPath);
+
+        file_put_contents($destinationPath, json_encode($this->generateArrayForRule($rule), JSON_PRETTY_PRINT));
+    }
+
+    /**
+     * @param array  $config
+     * @param string $configPath
+     *
+     * @return FixtureGeneratorRule
+     *
+     * @throws \Exception
+     */
+    private function createRuleFromConfig(array $config, string $configPath): FixtureGeneratorRule
+    {
+        if (empty($config)) {
+            throw new \Exception('Config array is empty');
+        }
+
+        $rule = new FixtureGeneratorRule();
+
+        if (!empty($key)) {
+            $rule->setKey($key);
+        }
+
+        if (isset($config['prefix'])) {
+            $rule->setPrefix($config['prefix']);
+        }
+
+        if (isset($config['strategy'])) {
+            $rule->setStrategy($config['strategy']);
+        }
+
+        if (isset($config['count_repeat'])) {
+            $rule->setCountRepeat($config['count_repeat']);
+        }
+
+        if (isset($config['referenceArray'])) {
+            $rule->setReferenceArray(
+                json_decode(
+                    file_get_contents($configPath.'/'.$config['referenceArray'].'.json'),
+                    true
+                )
+            );
+        }
+
+        if (isset($config['rules'])) {
+            foreach ($config['rules'] as $key => $item) {
+                $rule->addRule($this->createRuleFromConfig($item, $configPath));
+            }
+        }
+
+        /* @var FixtureGeneratorRule $rule */
+        return $rule;
+    }
+
+    /**
+     * @param string $key
+     * @param array  $ruleArray
+     *
+     * @return FixtureGeneratorRule
+     */
+    private function createRuleFromArray(string $key, array $ruleArray): FixtureGeneratorRule
+    {
+        $rule = new FixtureGeneratorRule();
+
+        if (!empty($key)) {
+            $rule->setKey($key);
+        }
+
+        if (isset($ruleArray['prefix'])) {
+            $rule->setPrefix($ruleArray['prefix']);
+        }
+
+        if (isset($ruleArray['strategy'])) {
+            $rule->setStrategy($ruleArray['strategy']);
+        }
+
+        if (isset($ruleArray['count_repeat'])) {
+            $rule->setCountRepeat($ruleArray['count_repeat']);
+        }
+
+        return $rule;
     }
 }

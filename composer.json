@@ -19,7 +19,8 @@
         "jms-serializer/serializer-bundle": "1.1.4",
         "liip/functional-test-bundle": "~1.6",
         "doctrine/doctrine-fixtures-bundle": "~2.3",
-        "phpunit/phpunit": "^5.4"
+        "phpunit/phpunit": "^5.4",
+        "indigophp/doctrine-annotation-autoload": "^0.1.0"
     },
 
     "require-dev": {

@@ -79,6 +79,11 @@ class FixtureGeneratorTest extends TestCase
         $json = $this->generator->generate($rule);
     }
 
+    public function testGenerateFromJsonConfig()
+    {
+        $this->generator->saveFromConfig(__DIR__.'/config.json', __DIR__, __DIR__.'/UserFixtures_output.json');
+    }
+
     public function testSave()
     {
         $rule = $this->createTestRule();
