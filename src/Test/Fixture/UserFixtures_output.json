@@ -1,92 +1,92 @@
 [
     {
-        "referenceName": "useruser-1",
-        "name": "UserUser-1",
-        "token": "user-tokenuser-token-1",
-        "password": "UserUser-1",
-        "owner": "user-3",
+        "referenceName": "user-1",
+        "name": "User-1",
+        "token": "user-token-1",
+        "password": "User-1",
+        "owner": "user-2",
         "members": [
-            "user-5",
-            "user-1",
-            "user-1",
+            "user-4",
+            "user-4",
             "user-3",
-            "user-5",
             "user-2",
-            "user-3",
+            "user-5",
+            "user-4",
+            "user-4",
             "user-1"
         ],
-        "random_word": "status-closed status-closed status-open"
-    },
-    {
-        "referenceName": "useruser-2",
-        "name": "UserUser-2",
-        "token": "user-tokenuser-token-2",
-        "password": "UserUser-2",
-        "owner": "user-5",
-        "members": [
-            "user-4",
-            "user-5",
-            "user-2",
-            "user-4",
-            "user-5",
-            "user-5",
-            "user-5",
-            "user-2"
-        ],
         "random_word": "status-open status-closed status-closed"
     },
     {
-        "referenceName": "useruser-3",
-        "name": "UserUser-3",
-        "token": "user-tokenuser-token-3",
-        "password": "UserUser-3",
-        "owner": "user-5",
+        "referenceName": "user-2",
+        "name": "User-2",
+        "token": "user-token-2",
+        "password": "User-2",
+        "owner": "user-4",
         "members": [
-            "user-4",
-            "user-5",
-            "user-5",
-            "user-2",
-            "user-2",
             "user-5",
             "user-1",
-            "user-3"
+            "user-2",
+            "user-4",
+            "user-3",
+            "user-4",
+            "user-2",
+            "user-5"
         ],
-        "random_word": "status-open status-closed status-closed"
+        "random_word": "status-closed status-closed status-closed"
     },
     {
-        "referenceName": "useruser-4",
-        "name": "UserUser-4",
-        "token": "user-tokenuser-token-4",
-        "password": "UserUser-4",
+        "referenceName": "user-3",
+        "name": "User-3",
+        "token": "user-token-3",
+        "password": "User-3",
         "owner": "user-5",
         "members": [
-            "user-1",
-            "user-1",
+            "user-3",
             "user-1",
             "user-3",
             "user-2",
-            "user-2",
-            "user-1",
-            "user-3"
+            "user-4",
+            "user-5",
+            "user-3",
+            "user-2"
         ],
         "random_word": "status-open status-open status-open"
     },
     {
-        "referenceName": "useruser-5",
-        "name": "UserUser-5",
-        "token": "user-tokenuser-token-5",
-        "password": "UserUser-5",
-        "owner": "user-3",
+        "referenceName": "user-4",
+        "name": "User-4",
+        "token": "user-token-4",
+        "password": "User-4",
+        "owner": "user-5",
         "members": [
+            "user-1",
+            "user-5",
+            "user-5",
             "user-2",
             "user-1",
             "user-2",
-            "user-5",
+            "user-4",
+            "user-3"
+        ],
+        "random_word": "status-closed status-closed status-closed"
+    },
+    {
+        "referenceName": "user-5",
+        "name": "User-5",
+        "token": "user-token-5",
+        "password": "User-5",
+        "owner": "user-2",
+        "members": [
+            "user-3",
+            "user-2",
+            "user-4",
             "user-5",
             "user-1",
-            "user-1",
+            "user-2",
+            "user-2",
             "user-2"
         ],
-        "random_word": "status-open status-closed status-closed"
+        "random_word": "status-closed status-closed status-open"
     }
 ]

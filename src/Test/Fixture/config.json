@@ -38,7 +38,7 @@
     },
     {
       "key": "random_word",
-      "prefix": "status-",
+      "prefix": "status",
       "words": ["open", "closed"],
       "count": 3,
       "strategy": "word"

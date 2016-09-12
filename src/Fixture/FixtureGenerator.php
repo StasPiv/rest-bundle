@@ -41,7 +41,11 @@ class FixtureGenerator
         $chunks = [];
 
         for ($i = 0; $i < $rule->getCount(); ++$i) {
-            $chunks[] = $rule->getPrefix().$this->generateChunk($rule);
+            if (!empty($rule->getPrefix())) {
+                $chunks[] = $rule->getPrefix().'-'.$this->generateChunk($rule);
+            } else {
+                $chunks[] = $this->generateChunk($rule);
+            }
         }
 
         return implode($rule->getDelimiter(), $chunks);
@@ -58,7 +62,7 @@ class FixtureGenerator
     {
         switch ($rule->getStrategy()) {
             case FixtureGeneratorStrategy::PREFIX_WITH_NUMBER:
-                $value = $rule->getPrefix().'-'.$rule->getNumber();
+                $value = $rule->getNumber();
 
                 $rule->setNumber($rule->getNumber() + 1);
 
