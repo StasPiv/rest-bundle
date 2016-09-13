@@ -1,6 +1,6 @@
 <?php
 
-namespace NorseDigital\Symfony\RestBundle\Test\Controller;
+namespace NorseDigital\Symfony\RestBundle\Exception\Test\Controller;
 
 /**
  * Class BaseControllerTestException.

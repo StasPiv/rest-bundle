@@ -9,7 +9,7 @@ namespace NorseDigital\Symfony\RestBundle\Test;
 
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-use NorseDigital\Symfony\RestBundle\Test\Controller\BaseControllerTestException;
+use NorseDigital\Symfony\RestBundle\Exception\Test\Controller\BaseControllerTestException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -19,23 +19,29 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 abstract class BaseControllerTest extends WebTestCase
 {
-    const USER_FIXTURES = [
-        'CoreBundle\\DataFixtures\\ORM\\UserRoleFixtures',
-        'CoreBundle\\DataFixtures\\ORM\\UserGroupFixtures',
-        'CoreBundle\\DataFixtures\\ORM\\UserFixtures',
-    ];
-
-    private $prefixApi = '/api/';
+    protected $prefixApi = '/'; // can be "/api"
 
     /**
      * @return string
      */
-    abstract protected function getPathToTestCases() : string;
+    protected function getPathToTestCases() : string
+    {
+        return static::createClient()->getContainer()->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'..'.
+        DIRECTORY_SEPARATOR.'Tests'.
+        DIRECTORY_SEPARATOR.'ApiBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'test_cases'.
+        DIRECTORY_SEPARATOR;
+    }
 
     /**
      * @return string
      */
-    abstract protected function getPathToLastFailed() : string;
+    protected function getPathToLastFailed() : string
+    {
+        return static::createClient()->getContainer()->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'..'.
+        DIRECTORY_SEPARATOR.'Tests'.
+        DIRECTORY_SEPARATOR.'ApiBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'last_failed'.
+        DIRECTORY_SEPARATOR;
+    }
 
     /**
      * @return array
@@ -146,7 +152,7 @@ abstract class BaseControllerTest extends WebTestCase
             }
 
             $headers = isset($data['headers']) ? $data['headers'] : [];
-            $client->request($data['method'], $this->prefixApi.$requestUri, $request, $files, $headers);
+            $client->request($data['method'], $this->prefixApi.'/'.$requestUri, $request, $files, $headers);
 
             $actualResponse = json_decode($client->getResponse()->getContent(), true);
 
