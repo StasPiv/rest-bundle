@@ -147,7 +147,7 @@ class FixtureGenerator
         $files = glob($pathToConfig.'*');
 
         if (empty($files)) {
-            throw new FileNotFoundException('There are not config files in directory '.$pathToConfig);
+            throw new FileNotFoundException('There are no config files in directory '.$pathToConfig);
         }
 
         foreach ($files as $configFileName) {
