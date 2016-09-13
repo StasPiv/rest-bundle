@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 abstract class BaseControllerTest extends WebTestCase
 {
-    protected $prefixApi = '/'; // can be "/api"
+    protected $prefixApi = ''; // can be "/api"
 
     /**
      * @return string
