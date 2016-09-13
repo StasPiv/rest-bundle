@@ -39,8 +39,7 @@ abstract class BaseControllerTest extends WebTestCase
     {
         return static::createClient()->getContainer()->get('kernel')->getRootDir().DIRECTORY_SEPARATOR.'..'.
         DIRECTORY_SEPARATOR.'Tests'.
-        DIRECTORY_SEPARATOR.'ApiBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'last_failed'.
-        DIRECTORY_SEPARATOR;
+        DIRECTORY_SEPARATOR.'ApiBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'last_failed.log';
     }
 
     /**
