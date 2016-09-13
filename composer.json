@@ -20,7 +20,8 @@
         "liip/functional-test-bundle": "~1.6",
         "doctrine/doctrine-fixtures-bundle": "~2.3",
         "phpunit/phpunit": "^5.4",
-        "indigophp/doctrine-annotation-autoload": "^0.1.0"
+        "indigophp/doctrine-annotation-autoload": "^0.1.0",
+        "symfony/validator": "^3.1"
     },
 
     "require-dev": {

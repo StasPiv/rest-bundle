@@ -10,8 +10,10 @@ use NorseDigital\Symfony\RestBundle\Event\ProcessorEvents;
 use NorseDigital\Symfony\RestBundle\Handler\ErrorInterface;
 use NorseDigital\Symfony\RestBundle\Handler\ProcessorInterface;
 use Symfony\Component\Form\Form;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\ConstraintViolation;
 
 /**
  * Class BaseController.
@@ -105,6 +107,8 @@ abstract class BaseController extends FOSRestController
      */
     private function handleFormErrors(Form $form, string $errorActionName)
     {
+        $this->validateForm($form);
+
         if ($form->isValid()) {
             return;
         }
@@ -136,5 +140,20 @@ abstract class BaseController extends FOSRestController
         return $this->handleView(
             $this->view($data, $statusCode)
         );
+    }
+
+    /**
+     * @param Form $form
+     */
+    private function validateForm(Form $form)
+    {
+        foreach ($this->container->get('validator')->validate($form->getData()) as $error) {
+            /* @var ConstraintViolation $error */
+            $form->addError(
+                new FormError(
+                    strtolower(preg_replace('/([A-Z])/', '_$1', $error->getPropertyPath()).': '.$error->getMessage())
+                )
+            );
+        }
     }
 }
