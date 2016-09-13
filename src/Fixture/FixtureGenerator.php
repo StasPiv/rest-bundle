@@ -146,6 +146,10 @@ class FixtureGenerator
 
         $files = glob($pathToConfig.'*');
 
+        if (empty($files)) {
+            throw new FileNotFoundException('There are not config files in directory '.$pathToConfig);
+        }
+
         foreach ($files as $configFileName) {
             $destination = str_replace(
                 '.json',

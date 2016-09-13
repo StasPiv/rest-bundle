@@ -1,12 +1,12 @@
 parameters:
-  core.service.nd_fixture.generator.class: NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator
-  api.kernel.listener.class: NorseDigital\Symfony\RestBundle\Event\Kernel\HttpKernelExceptionListener
+  nd.symfony.fixtures.generator.class: NorseDigital\Symfony\RestBundle\Fixture\FixtureGenerator
+  nd.symfony.listener.class: NorseDigital\Symfony\RestBundle\Event\Kernel\HttpKernelExceptionListener
 
 services:
-  core.service.nd_fixture_generator:
-    class: "%core.service.nd_fixture.generator.class%"
+  nd.symfony.fixtures.generator:
+    class: "%nd.symfony.fixtures.generator.class%"
 
-  api.kernel.listener:
-      class: "%api.kernel.listener.class%"
+  nd.symfony.kernel.listener:
+      class: "%nd.symfony.listener.class%"
       tags:
           - { name: kernel.event_subscriber }
