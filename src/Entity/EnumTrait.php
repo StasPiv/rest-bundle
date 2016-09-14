@@ -25,7 +25,7 @@ trait EnumTrait
     /**
      * @var bool
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="default_value" type="boolean")
      *
      * @JMS\Expose
      * @JMS\Type("boolean")
