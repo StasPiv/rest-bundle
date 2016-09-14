@@ -20,7 +20,7 @@ trait EnumServiceTrait
     /**
      * @return EnumInterface
      */
-    public function getDefaultPositionStatus(): EnumInterface
+    public function getDefault(): EnumInterface
     {
         /** @var EnumInterface $enum */
         $enum = $this->repository->findOneBy(['default' => true]);
