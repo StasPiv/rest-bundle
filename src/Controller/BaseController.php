@@ -44,6 +44,11 @@ abstract class BaseController extends FOSRestController
     {
         $data = [];
         try {
+            $this->container->get('event_dispatcher')->dispatch(
+                ProcessorEvents::PRE_LOAD,
+                (new ProcessorEvent($request))
+            );
+
             $requestMethod = strtolower($request->getMethod());
             $actionType = str_replace([$requestMethod, 'Action'], '', debug_backtrace()[1]['function']);
             $processActionName = 'process'.ucfirst($requestMethod).ucfirst($actionType);
@@ -70,11 +75,6 @@ abstract class BaseController extends FOSRestController
             $form->submit($params, false);
 
             $this->handleFormErrors($form, $errorActionName);
-
-            $this->container->get('event_dispatcher')->dispatch(
-                ProcessorEvents::PRE_LOAD,
-                (new ProcessorEvent($request))
-            );
 
             $data = $this->getProcessor()->$processActionName($form->getData());
 
