@@ -88,6 +88,20 @@ class FixtureGenerator
                 }
 
                 return $rule->getWords()[mt_rand(0, count($rule->getWords()) - 1)];
+            case FixtureGeneratorStrategy::NEXT_WORD:
+                if (empty($rule->getWords())) {
+                    throw new \Exception('words is needed for the rule `next_word`');
+                }
+
+                $word = $rule->getWords()[$rule->getNumber()];
+
+                if (isset($rule->getWords()[$rule->getNumber() + 1])) {
+                    $rule->setNumber($rule->getNumber() + 1);
+                } else {
+                    $rule->setNumber(0);
+                }
+
+                return $word;
             default:
                 return mt_rand(1, 1000);
         }
