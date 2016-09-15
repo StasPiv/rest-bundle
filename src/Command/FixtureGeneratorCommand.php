@@ -16,7 +16,7 @@ class FixtureGeneratorCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this->setName('nd:symfony:command:fixtures:generate')
-            ->addArgument('fileName')
+            ->addArgument('pathToFixtures')
             ->setDescription('Generate fixtures');
     }
 
@@ -27,7 +27,8 @@ class FixtureGeneratorCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->getContainer()->get('nd.symfony.fixtures.generator')
-             ->generateAllFixtures($input->getArgument('fileName'));
+             ->setPathToFixtures($input->getArgument('pathToFixtures'))
+             ->generateAllFixtures();
 
         $output->writeln('Fixtures have been generated');
     }

@@ -17,6 +17,37 @@ use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 class FixtureGenerator
 {
     /**
+     * @var string
+     */
+    private $pathToFixtures;
+
+    /**
+     * @param string $pathToFixtures
+     *
+     * @return FixtureGenerator
+     */
+    public function setPathToFixtures(string $pathToFixtures): self
+    {
+        $this->pathToFixtures = $pathToFixtures;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     *
+     * @throws FixtureGeneratorException
+     */
+    public function getPathToFixtures(): string
+    {
+        if (!isset($this->pathToFixtures)) {
+            throw new FixtureGeneratorException('You must define pathToFixtures for generator');
+        }
+
+        return $this->pathToFixtures;
+    }
+
+    /**
      * @param FixtureGeneratorRule $rule
      *
      * @return string json string
@@ -74,7 +105,12 @@ class FixtureGenerator
                 }
 
                 if (!empty($rule->getReferenceConfigFile())) {
-                    $referenceArray = json_decode(file_get_contents($rule->getReferenceConfigFile()), true);
+                    $referenceArray = json_decode(
+                        file_get_contents(
+                            $this->getPathToFixtures().DIRECTORY_SEPARATOR.$rule->getReferenceConfigFile()
+                        ),
+                        true
+                    );
                 }
 
                 if (empty($referenceArray)) {
@@ -154,11 +190,11 @@ class FixtureGenerator
         file_put_contents($destinationPath, json_encode($this->generateArrayForRule($rule), JSON_PRETTY_PRINT));
     }
 
-    public function generateAllFixtures(string $pathToFixtures)
+    public function generateAllFixtures()
     {
-        $pathToConfig = $pathToFixtures.'config/';
+        $pathToConfig = $this->getPathToFixtures().DIRECTORY_SEPARATOR.'config';
 
-        $files = glob($pathToConfig.'*');
+        $files = glob($pathToConfig.DIRECTORY_SEPARATOR.'*');
 
         if (empty($files)) {
             throw new FileNotFoundException('There are no config files in directory '.$pathToConfig);
@@ -177,7 +213,7 @@ class FixtureGenerator
             );
             $this->saveFromConfig(
                 $configFileName,
-                $pathToFixtures.$destination
+                $this->getPathToFixtures().DIRECTORY_SEPARATOR.$destination
             );
         }
     }
