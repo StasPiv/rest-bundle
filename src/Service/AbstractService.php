@@ -103,8 +103,10 @@ abstract class AbstractService implements ContainerAwareInterface
     /**
      * @param EntityInterface $entity
      * @param bool            $flush
+     *
+     * @return EntityInterface
      */
-    public function deleteEntity(EntityInterface $entity, bool $flush = true)
+    public function deleteEntity(EntityInterface $entity, bool $flush = true): EntityInterface
     {
         $entity->setDeletedAt(new \DateTime());
         $this->persist($entity);
@@ -112,6 +114,8 @@ abstract class AbstractService implements ContainerAwareInterface
         if ($flush) {
             $this->flush();
         }
+
+        return $entity;
     }
 
     /**
