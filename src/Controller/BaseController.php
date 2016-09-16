@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use NorseDigital\Symfony\RestBundle\Event\ProcessorEvent;
 use NorseDigital\Symfony\RestBundle\Event\ProcessorEvents;
+use NorseDigital\Symfony\RestBundle\Exception\Request\BadRequestException;
 use NorseDigital\Symfony\RestBundle\Handler\ErrorInterface;
 use NorseDigital\Symfony\RestBundle\Handler\ProcessorInterface;
 use Symfony\Component\Form\Form;
@@ -81,6 +82,10 @@ abstract class BaseController extends FOSRestController
             $statusCode = $successStatusCode;
         } catch (EntityNotFoundException $exception) {
             $statusCode = Response::HTTP_NO_CONTENT;
+        } catch (BadRequestException $exception) {
+            $statusCode = Response::HTTP_BAD_REQUEST;
+            $data['errorMessage'] = $exception->getMessage();
+            $data['errorInfo'] = $exception->getErrorInfo();
         } catch (\Throwable $exception) {
             $data['errorMessage'] = $exception->getMessage();
             if ($this->container->get('kernel')->getEnvironment() != 'prod') {
@@ -114,7 +119,14 @@ abstract class BaseController extends FOSRestController
         }
 
         if (!method_exists($this->getErrorHandler(), $errorActionName)) {
-            throw new \RuntimeException($form->getErrors(true, false), Response::HTTP_BAD_REQUEST);
+            $invalidFields = [];
+            foreach ($form->getErrors() as $error) {
+                preg_match('/(\w+): (.+)/', $error->getMessage(), $matches);
+                /* @var FormError $error */
+                $invalidFields[$matches[1]] = $matches[2];
+            }
+
+            throw new BadRequestException($form->getErrors(true, false), Response::HTTP_BAD_REQUEST, new \RuntimeException(), $invalidFields);
         }
 
         $this->getErrorHandler()->$errorActionName($form);
