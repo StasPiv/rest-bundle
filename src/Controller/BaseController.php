@@ -122,8 +122,10 @@ abstract class BaseController extends FOSRestController
             $invalidFields = [];
             foreach ($form->getErrors() as $error) {
                 preg_match('/(\w+): (.+)/', $error->getMessage(), $matches);
-                /* @var FormError $error */
-                $invalidFields[$matches[1]] = $matches[2];
+                if (isset($matches[1]) && isset($matches[2])) {
+                    /* @var FormError $error */
+                    $invalidFields[$matches[1]] = $matches[2];
+                }
             }
 
             throw new BadRequestException($form->getErrors(true, false), Response::HTTP_BAD_REQUEST, new \RuntimeException(), $invalidFields);
