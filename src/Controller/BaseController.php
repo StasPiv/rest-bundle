@@ -120,11 +120,21 @@ abstract class BaseController extends FOSRestController
 
         if (!method_exists($this->getErrorHandler(), $errorActionName)) {
             $invalidFields = [];
-            foreach ($form->getErrors() as $error) {
-                preg_match('/(\w+): (.+)/', $error->getMessage(), $matches);
-                if (isset($matches[1]) && isset($matches[2])) {
-                    /* @var FormError $error */
-                    $invalidFields[$matches[1]] = $matches[2];
+
+            if ($form->getErrors()->count() == 0) {
+                $chunkErrors = explode("\n", $form->getErrors(true, false));
+                for ($i = 0; $i < count($chunkErrors) - 1; $i+=2) {
+                    if (!empty($chunkErrors[$i]) && !empty($chunkErrors[$i + 1])) {
+                        $invalidFields[$chunkErrors[$i]] = preg_replace('/^\s+ERROR:\s+/', '', $chunkErrors[$i + 1]);
+                    }
+                }
+            } else {
+                foreach ($form->getErrors() as $error) {
+                    preg_match('/(\w+): (.+)/', $error->getMessage(), $matches);
+                    if (isset($matches[1]) && isset($matches[2])) {
+                        /* @var FormError $error */
+                        $invalidFields[$matches[1]] = $matches[2];
+                    }
                 }
             }
 
