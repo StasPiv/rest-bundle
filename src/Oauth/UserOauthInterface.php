@@ -42,9 +42,9 @@ interface UserOauthInterface
     public function getOauthId(): string;
 
     /**
-     * @param int $oauthId
+     * @param string $oauthId
      *
      * @return UserOauthInterface
      */
-    public function setOauthId(int $oauthId): self;
+    public function setOauthId(string $oauthId): self;
 }
