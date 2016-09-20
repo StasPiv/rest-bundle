@@ -37,9 +37,9 @@ interface UserOauthInterface
     public function setOauthAccessToken(string $oauthAccessToken) : self;
 
     /**
-     * @return int
+     * @return string
      */
-    public function getOauthId(): int;
+    public function getOauthId(): string;
 
     /**
      * @param int $oauthId
