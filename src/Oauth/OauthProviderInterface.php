@@ -3,13 +3,11 @@
  * Created by PhpStorm.
  * User: stas
  * Date: 20.09.16
- * Time: 10:38
+ * Time: 10:38.
  */
-
 namespace NorseDigital\Symfony\RestBundle\Oauth;
 
-
-interface OathProviderInterface
+interface OauthProviderInterface
 {
     /**
      * @return string
@@ -19,6 +17,7 @@ interface OathProviderInterface
     /**
      * @param string $accessToken
      * @param mixed  $errorMessage
+     *
      * @return mixed oauth identifier if exists or false otherwise
      */
     public function authenticate(string $accessToken, &$errorMessage);

@@ -3,16 +3,15 @@
  * Created by PhpStorm.
  * User: stas
  * Date: 20.09.16
- * Time: 10:48
+ * Time: 10:48.
  */
-
 namespace NorseDigital\Symfony\RestBundle\Service\OauthProvider;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use NorseDigital\Symfony\RestBundle\Oauth\OathProviderInterface;
+use NorseDigital\Symfony\RestBundle\Oauth\OauthProviderInterface;
 
-class FacebookProvider implements OathProviderInterface
+class FacebookProvider implements OauthProviderInterface
 {
     private $oauthUrl = 'https://graph.facebook.com/v2.5/me';
 
@@ -33,14 +32,15 @@ class FacebookProvider implements OathProviderInterface
 
     /**
      * @param string $accessToken
-     * @param mixed $errorMessage
+     * @param mixed  $errorMessage
+     *
      * @return mixed oauth identifier if exists or false otherwise
      */
     public function authenticate(string $accessToken, &$errorMessage)
     {
         $url = $this->oauthUrl.'?'.http_build_query(
             [
-                'access_token' => $accessToken
+                'access_token' => $accessToken,
             ]
         );
 
@@ -62,5 +62,4 @@ class FacebookProvider implements OathProviderInterface
             return false;
         }
     }
-
 }
