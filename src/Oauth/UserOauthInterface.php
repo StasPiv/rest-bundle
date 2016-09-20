@@ -3,16 +3,14 @@
  * Created by PhpStorm.
  * User: stas
  * Date: 20.09.16
- * Time: 10:39
+ * Time: 10:39.
  */
 namespace NorseDigital\Symfony\RestBundle\Oauth;
 
-
 /**
- * Class UserOathInterface.
- *
+ * Class UserOauthInterface.
  */
-interface UserOathInterface
+interface UserOauthInterface
 {
     /**
      * @return string
@@ -21,7 +19,8 @@ interface UserOathInterface
 
     /**
      * @param string $oauthProvider
-     * @return UserOathInterface
+     *
+     * @return UserOauthInterface
      */
     public function setOauthProvider(string $oauthProvider) : self;
 
@@ -32,7 +31,8 @@ interface UserOathInterface
 
     /**
      * @param string $oauthAccessToken
-     * @return UserOathInterface
+     *
+     * @return UserOauthInterface
      */
     public function setOauthAccessToken(string $oauthAccessToken) : self;
 
@@ -43,7 +43,8 @@ interface UserOathInterface
 
     /**
      * @param int $oauthId
-     * @return UserOathInterface
+     *
+     * @return UserOauthInterface
      */
     public function setOauthId(int $oauthId): self;
 }

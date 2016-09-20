@@ -35,9 +35,9 @@ trait UserOauthTrait
     /**
      * @param string $oauthProvider
      *
-     * @return UserOathInterface|self
+     * @return UserOauthInterface|self
      */
-    public function setOauthProvider(string $oauthProvider): UserOathInterface
+    public function setOauthProvider(string $oauthProvider): UserOauthInterface
     {
         $this->oauthProvider = $oauthProvider;
 
@@ -55,9 +55,9 @@ trait UserOauthTrait
     /**
      * @param string $oauthAccessToken
      *
-     * @return UserOathInterface|self
+     * @return UserOauthInterface|self
      */
-    public function setOauthAccessToken(string $oauthAccessToken): UserOathInterface
+    public function setOauthAccessToken(string $oauthAccessToken): UserOauthInterface
     {
         $this->oauthAccessToken = $oauthAccessToken;
 
@@ -75,9 +75,9 @@ trait UserOauthTrait
     /**
      * @param string $oauthId
      *
-     * @return UserOathInterface|self
+     * @return UserOauthInterface|self
      */
-    public function setOauthId(string $oauthId): UserOathInterface
+    public function setOauthId(string $oauthId): UserOauthInterface
     {
         $this->oauthId = $oauthId;
 
