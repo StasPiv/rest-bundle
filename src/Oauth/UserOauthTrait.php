@@ -3,9 +3,8 @@
  * Created by PhpStorm.
  * User: stas
  * Date: 20.09.16
- * Time: 10:41
+ * Time: 10:41.
  */
-
 namespace NorseDigital\Symfony\RestBundle\Oauth;
 
 trait UserOauthTrait
@@ -21,7 +20,7 @@ trait UserOauthTrait
     protected $oauthProvider;
 
     /**
-     * @var int
+     * @var string
      */
     protected $oauthId;
 
@@ -35,6 +34,7 @@ trait UserOauthTrait
 
     /**
      * @param string $oauthProvider
+     *
      * @return UserOathInterface|self
      */
     public function setOauthProvider(string $oauthProvider): UserOathInterface
@@ -54,6 +54,7 @@ trait UserOauthTrait
 
     /**
      * @param string $oauthAccessToken
+     *
      * @return UserOathInterface|self
      */
     public function setOauthAccessToken(string $oauthAccessToken): UserOathInterface
@@ -64,18 +65,19 @@ trait UserOauthTrait
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getOauthId(): int
+    public function getOauthId(): string
     {
         return $this->oauthId;
     }
 
     /**
-     * @param int $oauthId
+     * @param string $oauthId
+     *
      * @return UserOathInterface|self
      */
-    public function setOauthId(int $oauthId): UserOathInterface
+    public function setOauthId(string $oauthId): UserOathInterface
     {
         $this->oauthId = $oauthId;
 
