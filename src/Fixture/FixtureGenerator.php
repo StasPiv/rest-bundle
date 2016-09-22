@@ -201,15 +201,13 @@ class FixtureGenerator
         }
 
         foreach ($files as $configFileName) {
+            $camelizeName = preg_replace('/\d/', '', ucfirst(
+                Inflector::camelize(basename($configFileName))
+            ));
             $destination = str_replace(
                 '.json',
                 'Fixtures.json',
-                substr(
-                    ucfirst(
-                        Inflector::camelize(basename($configFileName))
-                    ),
-                    2
-                )
+                $camelizeName
             );
             $this->saveFromConfig(
                 $configFileName,
