@@ -7,8 +7,8 @@
  */
 namespace NorseDigital\Symfony\RestBundle\Service;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use NorseDigital\Symfony\RestBundle\Entity\EntityInterface;
+use NorseDigital\Symfony\RestBundle\Repository\EntityRepository;
 use NorseDigital\Symfony\RestBundle\Request\ListRequestInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -24,7 +24,7 @@ abstract class AbstractService implements ContainerAwareInterface
     protected $entityClass;
 
     /**
-     * @var ObjectRepository
+     * @var EntityRepository
      */
     protected $repository;
 
@@ -166,5 +166,26 @@ abstract class AbstractService implements ContainerAwareInterface
             $request->getLimit(),
             ($request->getPage() - 1) * $request->getLimit()
         );
+    }
+
+    /**
+     * @param array                $criteria
+     * @param ListRequestInterface $request
+     *
+     * @return array total and items
+     */
+    public function getEntitiesByWithListRequestAndTotal(array $criteria, ListRequestInterface $request)
+    {
+        $items = $this->getEntitiesBy(
+            $criteria,
+            [$request->getSort() => $request->getOrder()],
+            $request->getLimit(),
+            ($request->getPage() - 1) * $request->getLimit()
+        );
+
+        return [
+            'total' => $this->repository->countByCriteria($criteria),
+            'items' => $items,
+        ];
     }
 }
