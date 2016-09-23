@@ -92,4 +92,16 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository
             ->setMaxResults($request->getLimit())
             ->addOrderBy($alias.'.'.$request->getSort(), $request->getOrder());
     }
+
+    /**
+     * @param array $criteria
+     *
+     * @return int
+     */
+    public function countByCriteria(array $criteria): int
+    {
+        $persister = $this->_em->getUnitOfWork()->getEntityPersister($this->_entityName);
+
+        return $persister->count($criteria);
+    }
 }
