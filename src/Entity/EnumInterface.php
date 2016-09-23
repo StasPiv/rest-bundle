@@ -20,16 +20,4 @@ interface EnumInterface
      * @return EnumInterface
      */
     public function setTitle(string $title): self;
-
-    /**
-     * @return bool
-     */
-    public function isDefault(): bool;
-
-    /**
-     * @param bool $default
-     *
-     * @return EnumInterface
-     */
-    public function setDefault(bool $default): self;
 }

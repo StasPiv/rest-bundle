@@ -7,12 +7,6 @@
  */
 namespace NorseDigital\Symfony\RestBundle\Service;
 
-use NorseDigital\Symfony\RestBundle\Entity\EnumInterface;
-
 interface EnumServiceInterface
 {
-    /**
-     * @return EnumInterface
-     */
-    public function getDefault(): EnumInterface;
 }

@@ -23,14 +23,14 @@ trait EnumTrait
     private $title;
 
     /**
-     * @var bool
+     * @var int
      *
-     * @ORM\Column(name="default_value", type="boolean")
+     * @ORM\Column(type="integer")
      *
      * @JMS\Expose
-     * @JMS\Type("boolean")
+     * @JMS\Type("integer")
      */
-    private $default;
+    private $priority;
 
     /**
      * @return string
@@ -53,21 +53,21 @@ trait EnumTrait
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isDefault(): bool
+    public function getPriority(): int
     {
-        return $this->default;
+        return $this->priority;
     }
 
     /**
-     * @param bool $default
+     * @param int $priority
      *
      * @return EnumInterface|self
      */
-    public function setDefault(bool $default): EnumInterface
+    public function setPriority(int $priority): EnumInterface
     {
-        $this->default = $default;
+        $this->priority = $priority;
 
         return $this;
     }

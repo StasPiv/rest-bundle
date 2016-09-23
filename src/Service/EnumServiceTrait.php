@@ -7,7 +7,6 @@
  */
 namespace NorseDigital\Symfony\RestBundle\Service;
 
-use NorseDigital\Symfony\RestBundle\Entity\EnumInterface;
 use NorseDigital\Symfony\RestBundle\Repository\EntityRepository;
 
 trait EnumServiceTrait
@@ -16,15 +15,4 @@ trait EnumServiceTrait
      * @var EntityRepository
      */
     protected $repository;
-
-    /**
-     * @return EnumInterface
-     */
-    public function getDefault(): EnumInterface
-    {
-        /** @var EnumInterface $enum */
-        $enum = $this->repository->findOneBy(['default' => true]);
-
-        return $enum;
-    }
 }
