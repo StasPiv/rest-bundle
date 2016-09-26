@@ -8,6 +8,7 @@
 namespace NorseDigital\Symfony\RestBundle\Test;
 
 use Doctrine\Common\DataFixtures\Executor\AbstractExecutor;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use NorseDigital\Symfony\RestBundle\Exception\Test\Controller\BaseControllerTestException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -74,7 +75,9 @@ abstract class BaseControllerTest extends WebTestCase
 
         if (isset($testData['fixtures'])) {
             $testData['fixtures'] = array_merge($this->getPredefinedFixtures(), $testData['fixtures']);
-            $fixtures = $this->loadFixtures($testData['fixtures'], null, 'doctrine')->getReferenceRepository();
+            $this->getContainer()->get('doctrine')->getManager()->getConnection()->prepare('SET FOREIGN_KEY_CHECKS = 0;')->execute();
+            $fixtures = $this->loadFixtures($testData['fixtures'], null, 'doctrine', ORMPurger::PURGE_MODE_TRUNCATE)->getReferenceRepository();
+            $this->getContainer()->get('doctrine')->getManager()->getConnection()->prepare('SET FOREIGN_KEY_CHECKS = 1;')->execute();
             unset($testData['fixtures']);
         }
 
