@@ -20,7 +20,7 @@ trait EnumTrait
      * @JMS\Expose
      * @JMS\Type("string")
      */
-    private $title;
+    protected $title;
 
     /**
      * @var int
@@ -30,7 +30,7 @@ trait EnumTrait
      * @JMS\Expose
      * @JMS\Type("integer")
      */
-    private $priority;
+    protected $priority;
 
     /**
      * @return string
