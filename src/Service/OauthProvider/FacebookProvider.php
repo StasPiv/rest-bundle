@@ -57,7 +57,7 @@ class FacebookProvider implements OauthProviderInterface
         }
 
         if (isset($response['id'])) {
-            return $response['id'];
+            return $response;
         } else {
             return false;
         }
