@@ -1,0 +1,61 @@
+<?php
+/**
+ * Created by rest-bundle.
+ * User: ssp
+ * Date: 27.09.16
+ * Time: 13:12.
+ */
+namespace NorseDigital\Symfony\RestBundle\Oauth;
+
+class OauthUser
+{
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return OauthUser
+     */
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return OauthUser
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+}

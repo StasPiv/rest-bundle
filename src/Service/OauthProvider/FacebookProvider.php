@@ -10,6 +10,7 @@ namespace NorseDigital\Symfony\RestBundle\Service\OauthProvider;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use NorseDigital\Symfony\RestBundle\Oauth\OauthProviderInterface;
+use NorseDigital\Symfony\RestBundle\Oauth\OauthUser;
 
 class FacebookProvider implements OauthProviderInterface
 {
@@ -36,7 +37,7 @@ class FacebookProvider implements OauthProviderInterface
      *
      * @return mixed oauth identifier if exists or false otherwise
      */
-    public function authenticate(string $accessToken, &$errorMessage)
+    public function authenticate(string $accessToken, &$errorMessage): OauthUser
     {
         $url = $this->oauthUrl.'?'.http_build_query(
             [
@@ -57,7 +58,7 @@ class FacebookProvider implements OauthProviderInterface
         }
 
         if (isset($response['id'])) {
-            return $response;
+            return (new OauthUser())->setName($response['name'])->setId($response['id']);
         } else {
             return false;
         }

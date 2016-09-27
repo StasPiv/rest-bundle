@@ -20,5 +20,5 @@ interface OauthProviderInterface
      *
      * @return mixed oauth identifier if exists or false otherwise
      */
-    public function authenticate(string $accessToken, &$errorMessage);
+    public function authenticate(string $accessToken, &$errorMessage): OauthUser;
 }
