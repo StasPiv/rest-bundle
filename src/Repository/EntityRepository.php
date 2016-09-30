@@ -102,6 +102,8 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository
     {
         $persister = $this->_em->getUnitOfWork()->getEntityPersister($this->_entityName);
 
+        $criteria['deletedAt'] = null;
+
         return $persister->count($criteria);
     }
 }
