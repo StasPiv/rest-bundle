@@ -86,7 +86,7 @@ class FixtureGeneratorRule
      *
      * @JMS\Type("integer")
      */
-    private $number = 1;
+    private $number = 0;
 
     /**
      * @return array|FixtureGeneratorRule[]
