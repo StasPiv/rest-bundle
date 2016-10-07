@@ -14,6 +14,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PropertyAccess\Exception\InvalidArgumentException;
 use Symfony\Component\Validator\ConstraintViolation;
 
 /**
@@ -86,13 +87,22 @@ abstract class BaseController extends FOSRestController
             $statusCode = Response::HTTP_BAD_REQUEST;
             $data['errorMessage'] = $exception->getMessage();
             $data['errorInfo'] = $exception->getErrorInfo();
+        } catch (InvalidArgumentException $exception) {
+            $data['errorMessage'] = $exception->getMessage();
+            if ($this->container->get('kernel')->getEnvironment() != 'prod') {
+                $data['debug']['errorFile'] = $exception->getFile();
+                $data['debug']['errorLine'] = $exception->getLine();
+                $data['debug']['errorType'] = get_class($exception);
+                $data['debug']['trace'] = $exception->getTraceAsString();
+            }
+            $statusCode = Response::HTTP_BAD_REQUEST;
         } catch (\Throwable $exception) {
             $data['errorMessage'] = $exception->getMessage();
             if ($this->container->get('kernel')->getEnvironment() != 'prod') {
                 $data['debug']['errorFile'] = $exception->getFile();
                 $data['debug']['errorLine'] = $exception->getLine();
                 $data['debug']['errorType'] = get_class($exception);
-                //$data['debug']['trace'] = $exception->getTrace();
+                $data['debug']['trace'] = $exception->getTraceAsString();
             }
             $statusCode = $exception->getCode() && round($exception->getCode() / 100) == 4 ? $exception->getCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
         }
