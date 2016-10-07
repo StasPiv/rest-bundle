@@ -93,7 +93,7 @@ abstract class BaseController extends FOSRestController
                 $data['debug']['errorFile'] = $exception->getFile();
                 $data['debug']['errorLine'] = $exception->getLine();
                 $data['debug']['errorType'] = get_class($exception);
-                $data['debug']['trace'] = $exception->getTraceAsString();
+                $data['debug']['trace'] = $data['debug']['trace'] = $exception->getTrace()[0]['args'][0];;
             }
             $statusCode = Response::HTTP_BAD_REQUEST;
         } catch (\Throwable $exception) {
