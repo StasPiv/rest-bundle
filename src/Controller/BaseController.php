@@ -135,6 +135,10 @@ abstract class BaseController extends FOSRestController
                         /* @var FormError $error */
                         $invalidFields[$matches[1]] = $matches[2];
                     }
+
+                    if (!empty($error->getMessageParameters())) {
+                        $invalidFields = $error->getMessageParameters();
+                    }
                 }
             }
 
