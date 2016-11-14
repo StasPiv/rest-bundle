@@ -46,15 +46,15 @@ abstract class BaseController extends FOSRestController
     {
         $data = [];
         try {
-            $this->container->get('event_dispatcher')->dispatch(
-                ProcessorEvents::PRE_LOAD,
-                (new ProcessorEvent($request))
-            );
-
             $requestMethod = strtolower($request->getMethod());
             $actionType = str_replace([$requestMethod, 'Action'], '', debug_backtrace()[1]['function']);
             $processActionName = 'process'.ucfirst($requestMethod).ucfirst($actionType);
             $errorActionName = 'error'.ucfirst($requestMethod).ucfirst($actionType);
+
+            $this->container->get('event_dispatcher')->dispatch(
+                ProcessorEvents::PRE_LOAD,
+                (new ProcessorEvent($request, $this->getProcessor(), $processActionName))
+            );
 
             $form = $this->container->get('form.factory')->createNamed('', $formType);
 
@@ -93,7 +93,7 @@ abstract class BaseController extends FOSRestController
                 $data['debug']['errorFile'] = $exception->getFile();
                 $data['debug']['errorLine'] = $exception->getLine();
                 $data['debug']['errorType'] = get_class($exception);
-                $data['debug']['trace'] = $data['debug']['trace'] = $exception->getTrace()[0]['args'][0];;
+                $data['debug']['trace'] = $data['debug']['trace'] = $exception->getTrace()[0]['args'][0];
             }
             $statusCode = Response::HTTP_BAD_REQUEST;
         } catch (\Throwable $exception) {

@@ -4,7 +4,6 @@ namespace NorseDigital\Symfony\RestBundle\Repository;
 
 use Doctrine\ORM\EntityNotFoundException;
 use NorseDigital\Symfony\RestBundle\Entity\EntityInterface;
-use NorseDigital\Symfony\RestBundle\Exception\Entity\DeletedEntityFoundException;
 use NorseDigital\Symfony\RestBundle\Request\ListRequestInterface;
 
 /**
@@ -75,13 +74,8 @@ class EntityRepository extends \Doctrine\ORM\EntityRepository
         }
 
         $className = $this->getClassName();
-
-        if (!$entity instanceof $className) {
+        if (!$entity instanceof $className || $entity->isDeleted()) {
             throw new EntityNotFoundException();
-        }
-
-        if ($entity->isDeleted()) {
-            throw new DeletedEntityFoundException();
         }
     }
 

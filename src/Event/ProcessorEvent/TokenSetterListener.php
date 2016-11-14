@@ -46,7 +46,7 @@ class TokenSetterListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            ProcessorEvents::PRE_LOAD => ['onProcessorPreLoad', 0],
+            ProcessorEvents::PRE_LOAD => ['onProcessorPreLoad', 20],
         ];
     }
 
