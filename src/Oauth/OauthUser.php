@@ -20,6 +20,11 @@ class OauthUser
     private $id;
 
     /**
+     * @var string
+     */
+    private $pictureUrl = '';
+
+    /**
      * @return int
      */
     public function getId(): int
@@ -56,6 +61,24 @@ class OauthUser
     {
         $this->name = $name;
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPictureUrl(): string
+    {
+        return $this->pictureUrl;
+    }
+
+    /**
+     * @param string $pictureUrl
+     * @return OauthUser
+     */
+    public function setPictureUrl(string $pictureUrl): self
+    {
+        $this->pictureUrl = $pictureUrl;
         return $this;
     }
 }

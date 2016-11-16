@@ -58,9 +58,25 @@ class FacebookProvider implements OauthProviderInterface
         }
 
         if (isset($response['id'])) {
-            return (new OauthUser())->setName($response['name'])->setId($response['id']);
+            return (new OauthUser())->setName($response['name'])->setId($response['id'])
+                                    ->setPictureUrl($this->getPictureUrl($accessToken));
         } else {
             return false;
         }
+    }
+
+    /**
+     * @param string $accessToken
+     * @param int $height
+     * @return string
+     */
+    private function getPictureUrl(string $accessToken, int $height = 200): string
+    {
+        return $this->oauthUrl.'/picture?'.http_build_query(
+                [
+                    'access_token' => $accessToken,
+                    'height' => $height
+                ]
+            );
     }
 }
