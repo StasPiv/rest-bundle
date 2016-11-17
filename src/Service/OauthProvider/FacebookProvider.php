@@ -67,7 +67,8 @@ class FacebookProvider implements OauthProviderInterface
 
     /**
      * @param string $accessToken
-     * @param int $height
+     * @param int    $height
+     *
      * @return string
      */
     private function getPictureUrl(string $accessToken, int $height = 200): string
@@ -75,7 +76,7 @@ class FacebookProvider implements OauthProviderInterface
         return $this->oauthUrl.'/picture?'.http_build_query(
                 [
                     'access_token' => $accessToken,
-                    'height' => $height
+                    'height' => $height,
                 ]
             );
     }

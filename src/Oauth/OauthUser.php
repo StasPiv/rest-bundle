@@ -74,11 +74,13 @@ class OauthUser
 
     /**
      * @param string $pictureUrl
+     *
      * @return OauthUser
      */
     public function setPictureUrl(string $pictureUrl): self
     {
         $this->pictureUrl = $pictureUrl;
+
         return $this;
     }
 }

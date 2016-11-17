@@ -29,7 +29,7 @@ trait UserOauthTrait
      */
     public function getOauthProvider(): string
     {
-        return $this->oauthProvider;
+        return (string) $this->oauthProvider;
     }
 
     /**
@@ -49,7 +49,7 @@ trait UserOauthTrait
      */
     public function getOauthAccessToken(): string
     {
-        return $this->oauthAccessToken;
+        return (string) $this->oauthAccessToken;
     }
 
     /**
