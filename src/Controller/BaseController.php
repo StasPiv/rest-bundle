@@ -45,6 +45,7 @@ abstract class BaseController extends FOSRestController
     protected function process(Request $request, string $formType, int $successStatusCode = Response::HTTP_OK) : Response
     {
         $data = [];
+        $translator = $this->container->get('translator');
         try {
             $requestMethod = strtolower($request->getMethod());
             $actionType = str_replace([$requestMethod, 'Action'], '', debug_backtrace()[1]['function']);
@@ -85,10 +86,10 @@ abstract class BaseController extends FOSRestController
             $statusCode = Response::HTTP_NO_CONTENT;
         } catch (BadRequestException $exception) {
             $statusCode = Response::HTTP_BAD_REQUEST;
-            $data['errorMessage'] = $exception->getMessage();
+            $data['errorMessage'] = $translator->trans($exception->getMessage());
             $data['errorInfo'] = $exception->getErrorInfo();
         } catch (InvalidArgumentException $exception) {
-            $data['errorMessage'] = $exception->getMessage();
+            $data['errorMessage'] = $translator->trans($exception->getMessage());
             if ($this->container->get('kernel')->getEnvironment() != 'prod') {
                 $data['debug']['errorFile'] = $exception->getFile();
                 $data['debug']['errorLine'] = $exception->getLine();
@@ -97,7 +98,7 @@ abstract class BaseController extends FOSRestController
             }
             $statusCode = Response::HTTP_BAD_REQUEST;
         } catch (\Throwable $exception) {
-            $data['errorMessage'] = $exception->getMessage();
+            $data['errorMessage'] = $translator->trans($exception->getMessage());
             if ($this->container->get('kernel')->getEnvironment() != 'prod') {
                 $data['debug']['errorFile'] = $exception->getFile();
                 $data['debug']['errorLine'] = $exception->getLine();
