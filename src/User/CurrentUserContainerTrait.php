@@ -68,4 +68,12 @@ trait CurrentUserContainerTrait
     {
         throw new UserByTokenNotImplementedException();
     }
+
+    /**
+     * @return bool
+     */
+    public function isAuthorized(): bool
+    {
+        return isset($this->currentUser);
+    }
 }
