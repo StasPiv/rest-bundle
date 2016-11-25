@@ -13,6 +13,7 @@ trait ListRequestTrait
     protected $page = 1;
     protected $sort = 'id';
     protected $order = Criteria::ASC;
+    protected $includeDeleted;
 
     /**
      * @return int
@@ -92,5 +93,21 @@ trait ListRequestTrait
         $this->order = $order;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIncludeDeleted()
+    {
+        return $this->includeDeleted;
+    }
+
+    /**
+     * @param mixed $includeDeleted
+     */
+    public function setIncludeDeleted($includeDeleted)
+    {
+        $this->includeDeleted = $includeDeleted;
     }
 }

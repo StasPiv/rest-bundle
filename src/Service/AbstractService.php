@@ -183,6 +183,12 @@ abstract class AbstractService implements ContainerAwareInterface
             ($request->getPage() - 1) * $request->getLimit()
         );
 
+        if ($request->getIncludeDeleted()) {
+            foreach ($items as $item) {
+                $item->setIncludeDeleted(true);
+            }
+        }
+
         return [
             'total' => $this->repository->countByCriteria($criteria),
             'items' => $items,

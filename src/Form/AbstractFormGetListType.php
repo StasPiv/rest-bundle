@@ -39,6 +39,9 @@ abstract class AbstractFormGetListType extends AbstractFormType
             ->add('sort', TextType::class, [
                 'required' => false,
             ])
+            ->add('includeDeleted', TextType::class, [
+                'required' => false,
+            ])
             ->add('order', ChoiceType::class, [
                 'required' => false,
                 'choices' => [

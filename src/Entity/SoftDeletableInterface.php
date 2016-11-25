@@ -27,4 +27,14 @@ interface SoftDeletableInterface
      * @param \DateTime $deletedAt
      */
     public function setDeletedAt(\DateTime $deletedAt = null);
+
+    /**
+     * @return bool
+     */
+    public function isIncludeDeleted(): bool;
+
+    /**
+     * @param bool $includeDeleted
+     */
+    public function setIncludeDeleted(bool $includeDeleted);
 }

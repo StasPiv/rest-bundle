@@ -21,6 +21,13 @@ trait SoftDeletableTrait
     protected $deletedAt;
 
     /**
+     * @var bool
+     *
+     * @JMS\Exclude()
+     */
+    protected $includeDeleted;
+
+    /**
      * {@inheritdoc}
      */
     public function isDeleted()
@@ -53,6 +60,10 @@ trait SoftDeletableTrait
      */
     private function filterDeleted(Collection $collection) : ArrayCollection
     {
+        if ($this->isIncludeDeleted()) {
+            return new ArrayCollection($collection->getValues());
+        }
+
         // getValues => reset keys
         return new ArrayCollection(
             $collection->filter(
@@ -103,5 +114,25 @@ trait SoftDeletableTrait
 
             $property->setAccessible(false);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIncludeDeleted(): bool
+    {
+        return (bool) $this->includeDeleted;
+    }
+
+    /**
+     * @param bool $includeDeleted
+     *
+     * @return SoftDeletableTrait
+     */
+    public function setIncludeDeleted(bool $includeDeleted): self
+    {
+        $this->includeDeleted = $includeDeleted;
+
+        return $this;
     }
 }

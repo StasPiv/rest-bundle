@@ -26,4 +26,14 @@ interface ListRequestInterface
      * @return int
      */
     public function getPage() : int;
+
+    /**
+     * @return mixed
+     */
+    public function getIncludeDeleted();
+
+    /**
+     * @param mixed $includeDeleted
+     */
+    public function setIncludeDeleted($includeDeleted);
 }
