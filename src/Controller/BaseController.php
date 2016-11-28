@@ -88,6 +88,11 @@ abstract class BaseController extends FOSRestController
             $statusCode = Response::HTTP_BAD_REQUEST;
             $data['errorMessage'] = $translator->trans($exception->getMessage());
             $data['errorInfo'] = $exception->getErrorInfo();
+            $data['errorInfo'] = $exception->getErrorInfo();
+
+            foreach ($data['errorInfo'] as $key => $value) {
+                $data['errorInfo'][$key] = $translator->trans($value);
+            }
         } catch (InvalidArgumentException $exception) {
             $data['errorMessage'] = $translator->trans($exception->getMessage());
             if ($this->container->get('kernel')->getEnvironment() != 'prod') {
