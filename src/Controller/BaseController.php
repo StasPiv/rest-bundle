@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use NorseDigital\Symfony\RestBundle\Event\ProcessorEvent;
 use NorseDigital\Symfony\RestBundle\Event\ProcessorEvents;
+use NorseDigital\Symfony\RestBundle\Exception\ParametrizedExceptionInterface;
 use NorseDigital\Symfony\RestBundle\Exception\Request\BadRequestException;
 use NorseDigital\Symfony\RestBundle\Handler\ErrorInterface;
 use NorseDigital\Symfony\RestBundle\Handler\ProcessorInterface;
@@ -84,6 +85,9 @@ abstract class BaseController extends FOSRestController
             $statusCode = $successStatusCode;
         } catch (EntityNotFoundException $exception) {
             $statusCode = Response::HTTP_NO_CONTENT;
+        } catch (ParametrizedExceptionInterface $exception) {
+            $statusCode = Response::HTTP_BAD_REQUEST;
+            $data['errorMessage'] = $translator->trans($exception->getMessage(), $exception->getParameters());
         } catch (BadRequestException $exception) {
             $statusCode = Response::HTTP_BAD_REQUEST;
             $data['errorMessage'] = $translator->trans($exception->getMessage());
